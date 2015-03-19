@@ -11,7 +11,23 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<import resource="classpath:security-context.xml" />
+	<import resource="classpath:database-configuration.xml" />
+	<context:annotation-config />
+	
 	<bean id="customerController" class="licenta.rest.controller.CustomerController" />
 
-
+	
+	
+	 <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="thread">
+                    <bean class="org.springframework.context.support.SimpleThreadScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+	 <bean id="customerDao"
+          class="licenta.persistence.dao.impl.CustomerDaoImpl"/>
 </beans>
