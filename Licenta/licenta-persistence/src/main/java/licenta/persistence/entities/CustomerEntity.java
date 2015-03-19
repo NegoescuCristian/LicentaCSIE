@@ -14,6 +14,7 @@ public class CustomerEntity {
     @GeneratedValue
     private long id;
     private String name;
+    private String lastName;
     
     public long getId() {
         return id;
@@ -27,6 +28,5 @@ public class CustomerEntity {
     public void setName(String name) {
         this.name = name;
     }
-    
     
 }
