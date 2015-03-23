@@ -95,7 +95,18 @@
 			<version>1.7.10</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.8</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
     </dependencies>
+    	
 
     <build>
         <finalName>licenta-capi</finalName>

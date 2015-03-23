@@ -9,9 +9,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import licenta.persistence.dao.AbstractDao;
 
+@Transactional
+@Repository
 public class AbstractDaoImpl<T> implements AbstractDao<T>{
 
     protected Class<T> entityClass;
@@ -34,6 +38,7 @@ public class AbstractDaoImpl<T> implements AbstractDao<T>{
 
     @Override
     public void persist(T entity) {
+        System.out.println("persist========="+entity.toString());
         entityManager.persist(entity);
     }
 
@@ -56,6 +61,7 @@ public class AbstractDaoImpl<T> implements AbstractDao<T>{
 
     @Override
     public T findById(long id) {
+        System.out.println(entityClass.toString());
         return entityManager.find(entityClass, id);
     }
 
