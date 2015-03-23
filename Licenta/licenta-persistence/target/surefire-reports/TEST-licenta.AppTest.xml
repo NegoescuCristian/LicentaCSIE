@@ -2,8 +2,8 @@
 <testsuite failures="0" time="0.009" errors="0" skipped="0" tests="1" name="licenta.AppTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="/home/churmuzache/java/jdk1.7.0_75/jre/lib/amd64"/>
-    <property name="java.vm.version" value="24.75-b04"/>
+    <property name="sun.boot.library.path" value="/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/amd64"/>
+    <property name="java.vm.version" value="24.65-b04"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
@@ -14,10 +14,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/churmuzache/personal/Licenta_Cristi/LicentaCSIE/trunk/Licenta"/>
-    <property name="java.runtime.version" value="1.7.0_75-b13"/>
+    <property name="user.dir" value="/home/rpopescu/workspace/Licenta/LicentaCSIE.git/trunk/Licenta"/>
+    <property name="java.runtime.version" value="1.7.0_65-b17"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="/home/churmuzache/java/jdk1.7.0_75/jre/lib/endorsed"/>
+    <property name="java.endorsed.dirs" value="/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
@@ -30,26 +30,26 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="3.13.0-45-generic"/>
-    <property name="user.home" value="/home/churmuzache"/>
+    <property name="os.version" value="3.13.0-24-generic"/>
+    <property name="user.home" value="/home/rpopescu"/>
     <property name="user.timezone" value="Europe/Bucharest"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="1.7"/>
-    <property name="user.name" value="churmuzache"/>
+    <property name="user.name" value="rpopescu"/>
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="/home/churmuzache/java/jdk1.7.0_75/jre"/>
+    <property name="java.home" value="/home/rpopescu/Downloads/jdk1.7.0_65/jre"/>
     <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="1.7.0_75"/>
-    <property name="java.ext.dirs" value="/home/churmuzache/java/jdk1.7.0_75/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="java.version" value="1.7.0_65"/>
+    <property name="java.ext.dirs" value="/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/ext:/usr/java/packages/lib/ext"/>
     <property name="securerandom.source" value="file:/dev/./urandom"/>
-    <property name="sun.boot.class.path" value="/home/churmuzache/java/jdk1.7.0_75/jre/lib/resources.jar:/home/churmuzache/java/jdk1.7.0_75/jre/lib/rt.jar:/home/churmuzache/java/jdk1.7.0_75/jre/lib/sunrsasign.jar:/home/churmuzache/java/jdk1.7.0_75/jre/lib/jsse.jar:/home/churmuzache/java/jdk1.7.0_75/jre/lib/jce.jar:/home/churmuzache/java/jdk1.7.0_75/jre/lib/charsets.jar:/home/churmuzache/java/jdk1.7.0_75/jre/lib/jfr.jar:/home/churmuzache/java/jdk1.7.0_75/jre/classes"/>
+    <property name="sun.boot.class.path" value="/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/resources.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/rt.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/sunrsasign.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/jsse.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/jce.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/charsets.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/lib/jfr.jar:/home/rpopescu/Downloads/jdk1.7.0_65/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="maven.home" value="/usr/share/maven"/>
     <property name="file.separator" value="/"/>
