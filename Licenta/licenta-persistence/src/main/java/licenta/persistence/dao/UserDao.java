@@ -4,6 +4,6 @@ import licenta.persistence.entities.UserEntity;
 
 public interface UserDao extends AbstractDao<UserEntity>{
     
-    UserEntity findByUsername(String userName);
+    UserEntity findByUsernameAndPassword(String userName, String password);
 
 }

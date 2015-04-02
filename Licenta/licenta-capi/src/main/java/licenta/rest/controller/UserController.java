@@ -55,10 +55,10 @@ public class UserController {
 	}
 	
 	@GET
-	@Path("/{userName}")
+	@Path("/{userName}/{password}")
 	@Produces("application/json")
-	public Response getCustomerByUsername(@PathParam("userName")String userName){
-	    UserEntity user = userDao.findByUsername(userName);
+	public Response getCustomerByUsername(@PathParam("userName")String userName, @PathParam("password")String password){
+	    UserEntity user = userDao.findByUsernameAndPassword(userName, password);
 	    
 	    return Response.status(200).entity(user).build();
 	   }

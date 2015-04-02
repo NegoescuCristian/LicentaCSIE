@@ -16,7 +16,7 @@ public class UserDaoImpl extends AbstractDaoImpl<UserEntity>implements UserDao {
     }
 
     @Override
-    public UserEntity findByUsername(String userName) {
+    public UserEntity findByUsernameAndPassword(String userName, String password) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserEntity> cq = cb
                 .createQuery(UserEntity.class);
