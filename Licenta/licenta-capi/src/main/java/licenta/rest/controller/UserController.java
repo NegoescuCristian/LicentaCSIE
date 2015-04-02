@@ -8,8 +8,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import licenta.persistence.dao.CustomerDao;
-import licenta.persistence.entities.CustomerEntity;
+import licenta.persistence.dao.UserDao;
+import licenta.persistence.entities.UserEntity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,40 +17,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-@Path("/customer")
+@Path("/user")
 @Consumes("application/json")
 @Produces("application/json")
-public class CustomerController {
+public class UserController {
 
     @Autowired
-    private CustomerDao customerDao;
+    private UserDao userDao;
 	/**
 	 * Test method only
 	 * 
 	 * @return
 	 */
 	@GET
-	@Path("/{customerId}")
+	@Path("/{userId}")
 	@Produces("application/json")
-	public Response getCustomer(@PathParam("customerId")long customerId) {
+	public Response getCustomer(@PathParam("userId")long userId) {
 		//Authentication auth = SecurityContextHolder.getContext()
 		//		.getAuthentication();
 		//System.out.println(auth.getName());
 		//System.out.println(auth.getCredentials());
-		CustomerEntity customer = customerDao.findById(customerId);
-		return Response.status(200).entity(customer).build();
+		UserEntity user = userDao.findById(userId);
+		return Response.status(200).entity(user).build();
 	}
 
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response validateCustomer(CustomerModel customer) {
+	public Response validateCustomer(UserModel user) {
 	    System.out.println("name");
-	    CustomerEntity customerEntity = new CustomerEntity();
-	    System.out.println(customer.getName());
-	    customerEntity.setName(customer.getName());
-	    customerDao.persist(customerEntity);
+	    UserEntity userEntity = new UserEntity();
+	    System.out.println(user.getUserName());
+	    userEntity.setUserName(user.getUserName());
+	    userEntity.setPassword(user.getPassword());
+	    userDao.persist(userEntity);
 	    return Response.status(200).build();
 	}
+	
+	@GET
+	@Path("/{userName}")
+	@Produces("application/json")
+	public Response getCustomerByUsername(@PathParam("userName")String userName){
+	    UserEntity user = userDao.findByUsername(userName);
+	    
+	    return Response.status(200).entity(user).build();
+	   }
 
 }

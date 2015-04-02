@@ -14,7 +14,7 @@
 	<import resource="classpath:database-configuration.xml" />
 	<context:annotation-config />
 	
-	<bean id="customerController" class="licenta.rest.controller.CustomerController" />
+	<bean id="customerController" class="licenta.rest.controller.UserController" />
 
 	
 	
@@ -28,6 +28,6 @@
         </property>
     </bean>
     
-	 <bean id="customerDao"
-          class="licenta.persistence.dao.impl.CustomerDaoImpl"/>
+	 <bean id="userDao"
+          class="licenta.persistence.dao.impl.UserDaoImpl"/>
 </beans>

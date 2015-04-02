@@ -4,7 +4,7 @@
         version="2.0">
     <persistence-unit name="testPersistence">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>licenta.persistence.entities.CustomerEntity</class>
+        <class>licenta.persistence.entities.UserEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
     </persistence-unit>
 </persistence>
