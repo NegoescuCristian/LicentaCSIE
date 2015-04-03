@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import licenta.persistence.dao.UserDao;
 import licenta.persistence.entities.UserEntity;
@@ -32,7 +33,7 @@ public class UserController {
 	@GET
 	@Path("/{userId}")
 	@Produces("application/json")
-	public Response getCustomer(@PathParam("userId")long userId) {
+	public Response getUser(@PathParam("userId")long userId) {
 		//Authentication auth = SecurityContextHolder.getContext()
 		//		.getAuthentication();
 		//System.out.println(auth.getName());
@@ -42,15 +43,17 @@ public class UserController {
 	}
 
 	@POST
+	@Path("/register")
 	@Consumes("application/json")
 	@Produces("application/json")
-	public Response validateCustomer(UserModel user) {
-	    System.out.println("name");
+	public Response registerCustomer(UserModel user) {
+	    System.out.println("name "+user.getUserName());
 	    UserEntity userEntity = new UserEntity();
-	    System.out.println(user.getUserName());
 	    userEntity.setUserName(user.getUserName());
 	    userEntity.setPassword(user.getPassword());
 	    userDao.persist(userEntity);
+	    
+	    
 	    return Response.status(200).build();
 	}
 	
@@ -59,8 +62,24 @@ public class UserController {
 	@Produces("application/json")
 	public Response getCustomerByUsername(@PathParam("userName")String userName, @PathParam("password")String password){
 	    UserEntity user = userDao.findByUsernameAndPassword(userName, password);
+	    if(user == null)
+	        return Response.status(Status.NOT_FOUND).build();
 	    
-	    return Response.status(200).entity(user).build();
+	    return Response.status(Status.OK).entity(user).build();
 	   }
-
+	
+	@POST
+	@Path("/login")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response validateCustomer(UserModel user) {
+        System.out.println("name "+user.getUserName());
+        
+        UserEntity userEntity = userDao.findByUsernameAndPassword(user.getUserName(), user.getPassword());
+        if(userEntity == null)
+            return Response.status(Status.NOT_FOUND).build();
+        
+        return Response.status(200).build();
+    }
+	
 }

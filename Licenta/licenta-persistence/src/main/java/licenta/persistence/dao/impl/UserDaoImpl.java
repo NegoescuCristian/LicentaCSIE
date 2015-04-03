@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import licenta.persistence.dao.UserDao;
@@ -22,12 +23,16 @@ public class UserDaoImpl extends AbstractDaoImpl<UserEntity>implements UserDao {
                 .createQuery(UserEntity.class);
         Root<UserEntity> user = cq.from(UserEntity.class);
         cq.select(user);
-        cq.where(cb.equal(user.get("userName"), userName));
+        Predicate condition = cb.and(cb.equal(user.get("userName"), userName), cb.equal(user.get("password"),password ));
+        cq.where(condition);
+        
         List<UserEntity> resultList = this.entityManager.createQuery(cq)
                 .getResultList();
         if (resultList.isEmpty()) {
             return null;
         }
         return resultList.get(0);
+        
+        
     }
 }
