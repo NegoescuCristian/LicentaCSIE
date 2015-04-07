@@ -1,9 +1,6 @@
 package licenta.persistence.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -13,6 +10,7 @@ public class UserEntity {
     @Id()
     @GeneratedValue
     private long id;
+    @Column(unique = true)
     private String userName;
     private String password;
     
