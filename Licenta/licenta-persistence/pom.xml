@@ -47,6 +47,11 @@
 			<artifactId>spring-tx</artifactId>
 			<version>3.2.8.RELEASE</version>
 	</dependency>
+      <dependency>
+          <groupId>licenta</groupId>
+          <artifactId>licenta-model</artifactId>
+          <version>0.1</version>
+      </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

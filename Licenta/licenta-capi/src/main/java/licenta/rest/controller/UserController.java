@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import ro.licenta.customer.models.UserEntityResponse;
+import ro.negoescu.licenta.user.UserService;
 
 @Path("/user")
 @Consumes("application/json")
@@ -24,7 +26,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class UserController {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 	/**
 	 * Test method only
 	 * 
@@ -34,38 +36,37 @@ public class UserController {
 	@Path("/{userId}")
 	@Produces("application/json")
 	public Response getUser(@PathParam("userId")long userId) {
-		//Authentication auth = SecurityContextHolder.getContext()
-		//		.getAuthentication();
-		//System.out.println(auth.getName());
-		//System.out.println(auth.getCredentials());
-		UserEntity user = userDao.findById(userId);
-		return Response.status(200).entity(user).build();
-	}
+
+        UserEntityResponse userResponse = userService.getUserById(userId);
+        if(userResponse == null) {
+            return Response.status(404).build();
+        }else {
+            return Response.status(200).entity(userResponse).build();
+        }
+    }
 
 	@POST
 	@Path("/register")
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response registerCustomer(UserModel user) {
-	    System.out.println("name "+user.getUserName());
-	    UserEntity userEntity = new UserEntity();
-	    userEntity.setUserName(user.getUserName());
-	    userEntity.setPassword(user.getPassword());
-	    userDao.persist(userEntity);
-	    
-	    
-	    return Response.status(200).build();
+	    boolean isRegistered = userService.registerCustomer(user.getUserName(),user.getPassword());
+        if(isRegistered) {
+            return Response.status(200).build();
+        }
+        return Response.status(403).build();
 	}
 	
 	@GET
-	@Path("/{userName}/{password}")
+	@Path("/{userName}")
 	@Produces("application/json")
-	public Response getCustomerByUsername(@PathParam("userName")String userName, @PathParam("password")String password){
-	    UserEntity user = userDao.findByUsernameAndPassword(userName, password);
-	    if(user == null)
-	        return Response.status(Status.NOT_FOUND).build();
-	    
-	    return Response.status(Status.OK).entity(user).build();
+	public Response getCustomerByUsername(@PathParam("userName")String userName){
+	    UserEntityResponse userResponse = userService.getUserByUserName(userName);
+        if(userResponse == null) {
+            return Response.status(404).build();
+        }else {
+            return Response.status(200).entity(userResponse).build();
+        }
 	   }
 	
 	@POST
@@ -73,12 +74,10 @@ public class UserController {
     @Consumes("application/json")
     @Produces("application/json")
     public Response validateCustomer(UserModel user) {
-        System.out.println("name "+user.getUserName());
-        
-        UserEntity userEntity = userDao.findByUsernameAndPassword(user.getUserName(), user.getPassword());
-        if(userEntity == null)
-            return Response.status(Status.NOT_FOUND).build();
-        
+        boolean isValidUser = userService.isValidUser(user.getUserName(), user.getPassword());
+        if(!isValidUser) {
+            return Response.status(404).build();
+        }
         return Response.status(200).build();
     }
 	

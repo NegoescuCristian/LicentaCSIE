@@ -7,11 +7,15 @@
     <artifactId>licenta-parent</artifactId>
     <version>1.0</version>
   </parent>
-  <groupId>licenta</groupId>
+
+    <groupId>licenta</groupId>
   <artifactId>licenta-model</artifactId>
   <version>0.1</version>
-  <name>licenta-model</name>
-  <url>http://maven.apache.org</url>
+
+    <name>licenta-model</name>
+
+    <url>http://maven.apache.org</url>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

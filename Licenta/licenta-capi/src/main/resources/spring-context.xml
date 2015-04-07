@@ -30,4 +30,9 @@
     
 	 <bean id="userDao"
           class="licenta.persistence.dao.impl.UserDaoImpl"/>
+
+     <bean id="userService" class="ro.negoescu.licenta.user.UserService">
+        <constructor-arg index="0" ref="userDao"/>
+     </bean>
+
 </beans>

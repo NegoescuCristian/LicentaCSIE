@@ -32,7 +32,23 @@ public class UserDaoImpl extends AbstractDaoImpl<UserEntity>implements UserDao {
             return null;
         }
         return resultList.get(0);
-        
-        
+    }
+
+    @Override
+    public UserEntity findByUsername(String userName) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> cq = cb
+                .createQuery(UserEntity.class);
+        Root<UserEntity> user = cq.from(UserEntity.class);
+        cq.select(user);
+        Predicate condition = cb.and(cb.equal(user.get("userName"), userName));
+        cq.where(condition);
+
+        List<UserEntity> resultList = this.entityManager.createQuery(cq)
+                .getResultList();
+        if (resultList.isEmpty()) {
+            return null;
+        }
+        return resultList.get(0);
     }
 }

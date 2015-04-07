@@ -12,6 +12,7 @@
       <module>licenta-model</module>
       <module>licenta-persistence</module>
       <module>licenta-capi</module>
+      <module>licenta-service</module>
     </modules>
 
     <build>
