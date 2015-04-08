@@ -3,6 +3,7 @@ package licenta.rest.controller;
 import java.io.Serializable;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import ro.licenta.customer.models.UserRole;
 
 @XStreamAlias("UserModel")
 public class UserModel implements Serializable {
@@ -13,8 +14,17 @@ public class UserModel implements Serializable {
     private static final long serialVersionUID = 1L;
     private String userName;
     private String password;
-    private String role;
-    
+
+    private UserRole userRole;
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -27,15 +37,5 @@ public class UserModel implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
-    
-    
-    
-    
-    
+
 }

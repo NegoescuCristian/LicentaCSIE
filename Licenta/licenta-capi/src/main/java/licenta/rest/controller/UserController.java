@@ -27,6 +27,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    protected Logger logger = LoggerFactory.getLogger(UserController.class);
 	/**
 	 * Test method only
 	 * 
@@ -50,7 +52,8 @@ public class UserController {
 	@Consumes("application/json")
 	@Produces("application/json")
 	public Response registerCustomer(UserModel user) {
-	    boolean isRegistered = userService.registerCustomer(user.getUserName(),user.getPassword());
+        logger.info("Received userName {} and role {}",user.getUserName(),user.getUserRole());
+	    boolean isRegistered = userService.registerCustomer(user.getUserName(),user.getPassword(), user.getUserRole());
         if(isRegistered) {
             return Response.status(200).build();
         }
@@ -58,7 +61,7 @@ public class UserController {
 	}
 	
 	@GET
-	@Path("/{userName}")
+	@Path("/getUser/{userName}")
 	@Produces("application/json")
 	public Response getCustomerByUsername(@PathParam("userName")String userName){
 	    UserEntityResponse userResponse = userService.getUserByUserName(userName);
