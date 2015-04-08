@@ -13,6 +13,7 @@ public class UserEntity {
     @Column(unique = true)
     private String userName;
     private String password;
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
     
     public long getId() {

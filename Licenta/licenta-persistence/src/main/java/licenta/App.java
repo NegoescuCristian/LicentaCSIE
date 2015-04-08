@@ -6,9 +6,6 @@ import javax.persistence.Persistence;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
-import licenta.persistence.dao.impl.CustomerDaoImpl;
-import licenta.persistence.entities.CustomerEntity;
-
 /**
  * Hello world!
  *
