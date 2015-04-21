@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>negoescu.cristian.licenta</groupId>
+        <artifactId>licenta-parent</artifactId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>licenta-service</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>licenta</groupId>
+            <artifactId>licenta-model</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>licenta</groupId>
+            <artifactId>licenta-persistence</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.10</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

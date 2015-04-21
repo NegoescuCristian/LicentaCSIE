@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://xmlns.jcp.org/xml/ns/persistence 
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+    <persistence-unit name="ssl" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.oneandone.ssl.persistence.provisioning.entities.SslProvisioningItem</class>
+        <class>com.oneandone.ssl.persistence.provisioning.entities.ProvisioningRequest</class>
+        <class>com.oneandone.ssl.persistence.provisioning.entities.CaAccountMap</class>
+        <class>com.oneandone.ssl.persistence.otherpss.entities.SharedHostingInfo</class>
+        <class>com.oneandone.ssl.persistence.entities.GeoTrustAccount</class>
+        <class>com.oneandone.ssl.persistence.entities.CaAccount</class>
+        <class>com.oneandone.ssl.persistence.entities.GeoTrustUser</class>
+        <class>com.oneandone.ssl.persistence.entities.GeoTrustCertificate</class>
+        <class>com.oneandone.ssl.persistence.entities.Certificate</class>
+        <class>com.oneandone.ssl.persistence.entities.TechnicalOrder</class>
+        <class>com.oneandone.ssl.persistence.entities.CertificateType</class>
+        <class>com.oneandone.ssl.persistence.entities.CertificateProvider</class>
+        <class>com.oneandone.ssl.persistence.entities.Tenant</class>
+        <class>com.oneandone.ssl.persistence.otherpss.entities.CertificateAdditionalInfo</class>
+        <class>com.oneandone.ssl.persistence.poller.entities.ModifiedOrdersJobInfo</class>
+        <class>com.oneandone.ssl.persistence.poller.entities.OrdersByPOIdJobInfo</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+<!--             <property name="javax.persistence.schema-generation-action" value="create"/> -->
+<!--             <property name="javax.persistence.schema-generation-target" value="scripts"/> -->
+<!--             <property name="javax.persistence.ddl-create-script-target" value="src/main/resources/sql/create_from_jpa.sql"/>             -->
+
+<!--         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> -->
+
+<!-- <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> -->
+<!-- <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sslnew" /> -->
+<!-- <property name="javax.persistence.jdbc.user" value="jboss" /> -->
+<!-- <property name="javax.persistence.jdbc.password" value="12345" /> -->
+<!-- <property name="hibernate.show_sql" value="true"/> -->
+<!-- <property name="hibernate.format_sql" value="true"/> -->
+		</properties>
+    </persistence-unit>
+</persistence>
+
+
+
+#######################################################################################################################################
+
+// final String queryString =
+        // "select o.id, p.marketId,p.serviceId,p.provisioningId,ct.articleNumber,ct.name,ct.managed,ct.isWildCard"
+        // + " from SslProvisioningItemEntity p JOIN p.order o join o.certificateType ct, CertificateEntity c "
+        // + " where p.provisioningId in (:provIds) "
+        // + " and c.id in (select cc.id from CertificateEntity cc join cc.order oo where oo.id=o.id)";
+        // Query query2 = this.entityManager.createQuery(queryString);
+        // query2.setParameter("provIds", provIds);
+        // List<?> result2 = query2.getResultList();
+        //
+        // return Collections2.transform((List<Object[]>) result2, new Function<Object[], CertificateInfo>() {
+        // @Override
+        // public CertificateInfo apply(Object[] input) {
+        // CertificateInfo info = new CertificateInfo();
+        // info.setOrderId(((Number) input[0]).longValue());
+        // info.setMarketId(((Number) input[1]).longValue());
+        // info.setServiceId(((Number) input[2]).longValue());
+        // info.setProvisioningId((String) input[3]);
+        // info.setArticleNumber(((Number) input[4]).longValue());
+        // info.setCertificateName((String) input[5]);
+        // info.setManaged((Boolean) input[6]);
+        // info.setWildCard((Boolean) input[7]);
+        //
+        // return info;
+        // }
+        // });
+	
+	
+######################################################################################################################################
+ EntityManagerFactory emf = Persistence.createEntityManagerFactory("ssl");
+
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            ProvisioningItemDaoImpl dao = new ProvisioningItemDaoImpl();
+            dao.setEntityManager(em);
+            List<SslProvisioningItemEntity> list = dao.getPaginatedProvisioningItemsList(
+                    Arrays.asList("2", "3", "4", "5", "6", "123456788", "55", "17", "13", "15", "11"), 1, 10);
+            for (SslProvisioningItemEntity e : list)
+                System.out.println(e);
+        } finally {
+            em.close();
+            emf.close();
+        }
