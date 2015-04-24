@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
@@ -19,7 +20,7 @@
 	<context:annotation-config />
 	
 	<bean id="customerController" class="licenta.rest.controller.UserController" />
-
+	<bean id="announceController" class="licenta.rest.controller.AnnounceController"/>
 	
 	
 	 <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
@@ -34,9 +35,18 @@
     
 	 <bean id="userDao"
           class="licenta.persistence.dao.impl.UserDaoImpl"/>
+	 <bean id="announceDao"
+	      class="licenta.persistence.dao.impl.AnnounceDaoImpl"/>
 
+ 	 <bean id="announceService" 
+         class="ro.negoescu.licenta.announce.AnnounceService">
+         <constructor-arg ref="announceDao"/>
+     </bean>
+     
      <bean id="userService" class="ro.negoescu.licenta.user.UserService">
         <constructor-arg index="0" ref="userDao"/>
      </bean>
+     
+    
 
 </beans>

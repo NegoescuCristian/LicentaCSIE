@@ -19,7 +19,8 @@
 	<context:annotation-config />
 	
 	<bean id="customerController" class="licenta.rest.controller.UserController" />
-
+	<bean id="announceController" class="licenta.rest.controller.AnnounceController"/>
+	
 	
 	
 	 <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
@@ -39,4 +40,11 @@
         <constructor-arg index="0" ref="userDao"/>
      </bean>
 
+     <bean id="announceDao"
+	      class="licenta.persistence.dao.impl.AnnounceDaoImpl"/>
+
+ 	 <bean id="announceService" 
+         class="ro.negoescu.licenta.announce.AnnounceService">
+         <constructor-arg ref="announceDao"/>
+     </bean>
 </beans>
