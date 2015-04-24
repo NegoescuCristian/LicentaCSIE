@@ -28,6 +28,11 @@
           <artifactId>slf4j-api</artifactId>
           <version>1.7.10</version>
       </dependency>
+      <dependency>
+          <groupId>com.thoughtworks.xstream</groupId>
+          <artifactId>xstream</artifactId>
+          <version>1.4.8</version>
+      </dependency>
 
   </dependencies>
 </project>

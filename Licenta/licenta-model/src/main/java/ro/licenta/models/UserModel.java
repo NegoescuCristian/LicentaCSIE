@@ -1,4 +1,4 @@
-package licenta.rest.controller;
+package ro.licenta.models;
 
 import java.io.Serializable;
 

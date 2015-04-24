@@ -9,6 +9,32 @@
     <artifactId>licenta-parent</artifactId>
     <version>1.0</version>
   </parent>
+    <profiles>
+
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/local</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>openshift</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/openshift</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
    <dependencies>
    		<dependency>
             <groupId>licenta</groupId>
@@ -20,6 +46,12 @@
            <groupId>negoescu.cristian.licenta</groupId>
            <artifactId>licenta-service</artifactId>
            <version>1.0</version>
+       </dependency>
+
+       <dependency>
+           <groupId>licenta</groupId>
+           <artifactId>licenta-model</artifactId>
+           <version>0.1</version>
        </dependency>
 
         <dependency>

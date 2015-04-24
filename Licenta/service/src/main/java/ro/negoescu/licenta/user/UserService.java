@@ -3,14 +3,20 @@ package ro.negoescu.licenta.user;
 import licenta.persistence.dao.UserDao;
 import licenta.persistence.entities.UserEntity;
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ro.licenta.customer.models.AccountDetailsResponse;
 import ro.licenta.customer.models.UserEntityResponse;
 import org.apache.commons.codec.binary.Hex;
-import ro.licenta.customer.models.UserRole;
+import ro.licenta.models.UserModel;
 
 /**
  * Created by churmuzache on 4/7/15.
  */
 public class UserService {
+
+
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private UserDao userDao;
 
@@ -29,6 +35,7 @@ public class UserService {
 
         UserEntity userEntity = userDao.findById(userId);
         if(userEntity == null) {
+            logger.error("No user was found for user id <%s>",userId);
             return null;
         }else {
             response.setUserName(userEntity.getUserName());
@@ -39,17 +46,17 @@ public class UserService {
     }
 
     /**
-     * TODO change the BUYER DEFAULT ROLE
      *
-     * @param userName
-     * @param password
      * @return
      */
-    public boolean registerCustomer(String userName, String password, UserRole userRole) {
+    public boolean registerCustomer(UserModel userModel) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userName);
-        userEntity.setPassword(Base64.encodeBase64String(password.getBytes()));
-        userEntity.setUserRole(userRole);
+        userEntity.setUserName(userModel.getUserName());
+        userEntity.setFirstName(userModel.getFirstName());
+        userEntity.setLastName(userModel.getLastName());
+        userEntity.setAddress(userModel.getAddress());
+        userEntity.setPassword(Base64.encodeBase64String(userModel.getPassword().getBytes()));
+        userEntity.setUserRole(userModel.getUserRole());
 
         try {
             userDao.persist(userEntity);
@@ -69,6 +76,7 @@ public class UserService {
 
         UserEntity userEntity = userDao.findByUsername(userName);
         if(userEntity == null) {
+            logger.error("No user was found for userName <%s>",userName);
             return null;
         }else {
             response.setUserName(userEntity.getUserName());
@@ -87,10 +95,32 @@ public class UserService {
 
         UserEntity entity = userDao.findByUsernameAndPassword(userName,Base64.encodeBase64String(password.getBytes()));
         if(entity == null) {
+            logger.error("No user was found for userName <%s>",userName);
             return false;
         }
         return true;
     }
 
+    /**
+     *
+     * @param userName
+     * @return
+     */
+    public AccountDetailsResponse getAccountDetails(String userName) {
+        AccountDetailsResponse detailsResponse = new AccountDetailsResponse();
+
+        UserEntity userEntity = userDao.findByUsername(userName);
+        if(userEntity == null) {
+            logger.error("No user was found for userName <%s>",userName);
+            return null;
+        } else {
+            detailsResponse.setFirstName(userEntity.getFirstName());
+            detailsResponse.setLastName(userEntity.getLastName());
+            detailsResponse.setAddress(userEntity.getAddress());
+            detailsResponse.setUserName(userEntity.getUserName());
+        }
+
+        return detailsResponse;
+    }
 
 }
