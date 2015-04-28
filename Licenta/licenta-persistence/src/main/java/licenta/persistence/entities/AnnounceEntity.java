@@ -7,6 +7,8 @@ import javax.persistence.Table;
 
 import ro.licenta.customer.models.Category;
 
+import java.util.Date;
+
 @Entity
 @Table(name="announce")
 public class AnnounceEntity {
@@ -18,6 +20,28 @@ public class AnnounceEntity {
     private String title;
     private String description;
     private Category category;
+    private Date startDate;
+    private long startSum;
+    private String imagePath;
+
+    public Date getStartDate() {
+        return startDate;
+    }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    public long getStartSum() {
+        return startSum;
+    }
+    public void setStartSum(long startSum) {
+        this.startSum = startSum;
+    }
+    public String getImagePath() {
+        return imagePath;
+    }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
     public long getId() {
         return id;
     }
