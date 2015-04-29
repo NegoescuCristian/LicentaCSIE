@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import ro.licenta.customer.models.AnnounceModel;
 import ro.negoescu.licenta.user.UserService;
 
+import java.util.Date;
+
 public class AnnounceService {
 
     private Logger logger = LoggerFactory.getLogger(AnnounceService.class);
@@ -25,8 +27,10 @@ public class AnnounceService {
         announceEntity.setCategory(announce.getCategory());
         announceEntity.setDescription(announce.getDescription());
         announceEntity.setTitle(announce.getTitle());
-        announceEntity.setId_user(announce.getUserId());
-       
+        announceEntity.setStartDate(new Date());
+        announceEntity.setStartSum(announce.getStartSum());
+        announceEntity.setImagePath(announce.getImagePath());
+
         try{
             announceDao.persist(announceEntity);
         }catch(Exception ex){
