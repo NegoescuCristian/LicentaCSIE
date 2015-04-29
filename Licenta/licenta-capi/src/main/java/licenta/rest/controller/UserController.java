@@ -87,6 +87,7 @@ public class UserController {
     @Produces("application/json")
     public Response getAccountDetails(@PathParam("userName") String userName) {
         AccountDetailsResponse response = userService.getAccountDetails(userName);
+        logger.info("Getting account details for user name %s",userName);
         if (response == null) {
             logger.error("No client was found for userName <%s>", userName);
             Response.status(404).entity(null).build();
