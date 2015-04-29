@@ -6,7 +6,25 @@ public class AnnounceModel {
     private String title;
     private String description;
     private Category category;
-    
+    private long startSum;
+    private String imagePath;
+
+    public long getStartSum() {
+        return startSum;
+    }
+
+    public void setStartSum(long startSum) {
+        this.startSum = startSum;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public long getUserId() {
         return userId;
     }
