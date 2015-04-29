@@ -3,6 +3,8 @@ package licenta.persistence.entities;
 import javax.persistence.*;
 import ro.licenta.customer.models.UserRole;
 
+import java.util.List;
+
 @Entity
 @Table(name="Customer")
 public class UserEntity {
@@ -18,7 +20,6 @@ public class UserEntity {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-
 
     public String getFirstName() {
         return firstName;
@@ -72,7 +73,4 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
 }
