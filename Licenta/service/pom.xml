@@ -11,6 +11,12 @@
 
     <artifactId>licenta-service</artifactId>
 
+	<properties>
+		<junit.version>4.11</junit.version>
+		<spring.version>3.2.8.RELEASE</spring.version>
+	 	<mockito.version>1.9.5</mockito.version>
+	</properties>
+	
     <dependencies>
         <dependency>
             <groupId>licenta</groupId>
@@ -34,6 +40,24 @@
             <version>1.7.10</version>
         </dependency>
 
+	<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>${mockito.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 
 </project>

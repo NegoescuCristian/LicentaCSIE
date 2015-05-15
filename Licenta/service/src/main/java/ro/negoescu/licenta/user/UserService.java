@@ -1,13 +1,20 @@
 package ro.negoescu.licenta.user;
 
+import licenta.persistence.dao.AnnounceDao;
 import licenta.persistence.dao.UserDao;
+import licenta.persistence.entities.AnnounceEntity;
 import licenta.persistence.entities.UserEntity;
+
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import ro.licenta.customer.models.AccountDetailsResponse;
+import ro.licenta.customer.models.AnnounceModel;
 import ro.licenta.customer.models.UserEntityResponse;
+
 import org.apache.commons.codec.binary.Hex;
+
 import ro.licenta.models.UserModel;
 
 /**
@@ -18,10 +25,11 @@ public class UserService {
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    private UserDao userDao;
+    private UserDao userDao; 
 
     public UserService(UserDao userDao) {
         this.userDao=userDao;
+        
     }
 
 
@@ -81,6 +89,7 @@ public class UserService {
         }else {
             response.setUserName(userEntity.getUserName());
             response.setUserRole(userEntity.getUserRole());
+            response.setPassword(Hex.encodeHexString(userEntity.getPassword().getBytes()));
             return response;
         }
     }
@@ -122,5 +131,6 @@ public class UserService {
 
         return detailsResponse;
     }
+    
 
 }
