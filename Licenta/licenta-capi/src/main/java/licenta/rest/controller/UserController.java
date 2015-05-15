@@ -11,8 +11,13 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+
 import ro.licenta.customer.models.AccountDetailsResponse;
+import ro.licenta.customer.models.AnnounceModel;
 import ro.licenta.customer.models.UserEntityResponse;
+import ro.negoescu.licenta.announce.AnnounceService;
 import ro.negoescu.licenta.user.UserService;
 import ro.licenta.models.UserModel;
 
@@ -23,7 +28,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    
     protected Logger logger = LoggerFactory.getLogger(UserController.class);
 
     /**
@@ -39,9 +44,9 @@ public class UserController {
         UserEntityResponse userResponse = userService.getUserById(userId);
         if (userResponse == null) {
             logger.error("User with userId <%s> was not found", userId);
-            return Response.status(404).build();
+            return Response.status(HttpStatus.NOT_FOUND.value()).build();
         } else {
-            return Response.status(200).entity(userResponse).build();
+            return Response.status(HttpStatus.OK.value()).entity(userResponse).build();
         }
     }
 
@@ -53,9 +58,9 @@ public class UserController {
         logger.info("Received userName <%s> and role <%s>", user.getUserName(), user.getUserRole());
         boolean isRegistered = userService.registerCustomer(user);
         if (isRegistered) {
-            return Response.status(200).build();
+            return Response.status(HttpStatus.OK.value()).build();
         }
-        return Response.status(403).build();
+        return Response.status(HttpStatus.FORBIDDEN.value()).build();
     }
 
     @GET
@@ -64,9 +69,9 @@ public class UserController {
     public Response getCustomerByUsername(@PathParam("userName") String userName) {
         UserEntityResponse userResponse = userService.getUserByUserName(userName);
         if (userResponse == null) {
-            return Response.status(404).build();
+            return Response.status(HttpStatus.NOT_FOUND.value()).build();
         } else {
-            return Response.status(200).entity(userResponse).build();
+            return Response.status(HttpStatus.OK.value()).entity(userResponse).build();
         }
     }
 
@@ -77,9 +82,9 @@ public class UserController {
     public Response validateCustomer(UserModel user) {
         boolean isValidUser = userService.isValidUser(user.getUserName(), user.getPassword());
         if (!isValidUser) {
-            return Response.status(404).build();
+            return Response.status(HttpStatus.NOT_FOUND.value()).build();
         }
-        return Response.status(200).build();
+        return Response.status(HttpStatus.OK.value()).build();
     }
 
     @GET
@@ -90,9 +95,10 @@ public class UserController {
         logger.info("Getting account details for user name %s",userName);
         if (response == null) {
             logger.error("No client was found for userName <%s>", userName);
-            Response.status(404).entity(null).build();
+            return Response.status(HttpStatus.NOT_FOUND.value()).entity(null).build();
         }
-        return Response.status(200).entity(response).build();
+        return Response.status(HttpStatus.OK.value()).entity(response).build();
     }
-
+    
+   
 }
