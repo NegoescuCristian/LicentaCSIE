@@ -68,7 +68,7 @@ public class UserService {
 
         try {
             userDao.persist(userEntity);
-        }catch( Exception exception ) {
+        }catch(Exception exception ) {
             return false;
         }
         return true;
