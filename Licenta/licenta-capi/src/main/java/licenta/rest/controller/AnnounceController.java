@@ -12,15 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ro.licenta.customer.models.AnnounceModel;
 import ro.negoescu.licenta.announce.AnnounceService;
+import ro.negoescu.licenta.announce.TestService;
 
 
 @Path("/announce")
-@Consumes("application/json")
-@Produces("application/json")
 public class AnnounceController {
 
     @Autowired
     private AnnounceService announceService;
+   
+    //private TestService testService;
 
     protected Logger logger = LoggerFactory.getLogger(AnnounceController.class);
     
@@ -32,7 +33,7 @@ public class AnnounceController {
         boolean isSaved = announceService.registerAnnounce(announce);
         if(!isSaved){
             logger.error("Error when saving announce");
-            Response.status(500).build();
+            return Response.status(500).build();
         }
       
         return Response.status(200).build();
