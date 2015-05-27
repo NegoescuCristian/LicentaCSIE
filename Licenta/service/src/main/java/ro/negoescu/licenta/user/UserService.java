@@ -3,6 +3,7 @@ package ro.negoescu.licenta.user;
 import licenta.persistence.dao.AnnounceDao;
 import licenta.persistence.dao.UserDao;
 import licenta.persistence.entities.AnnounceEntity;
+import licenta.persistence.entities.UserDetailsEntity;
 import licenta.persistence.entities.UserEntity;
 
 import org.apache.commons.codec.binary.Base64;
@@ -60,11 +61,15 @@ public class UserService {
     public boolean registerCustomer(UserModel userModel) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(userModel.getUserName());
-        userEntity.setFirstName(userModel.getFirstName());
-        userEntity.setLastName(userModel.getLastName());
-        userEntity.setAddress(userModel.getAddress());
+
+        UserDetailsEntity userDetails = new UserDetailsEntity();
+        userDetails.setFirstName(userModel.getFirstName());
+        userDetails.setLastName(userModel.getLastName());
+        userDetails.setAddress(userModel.getAddress());
+
         userEntity.setPassword(Base64.encodeBase64String(userModel.getPassword().getBytes()));
         userEntity.setUserRole(userModel.getUserRole());
+        userEntity.setUserDetailsEntity(userDetails);
 
         try {
             userDao.persist(userEntity);
@@ -123,9 +128,10 @@ public class UserService {
             logger.error("No user was found for userName <%s>",userName);
             return null;
         } else {
-            detailsResponse.setFirstName(userEntity.getFirstName());
-            detailsResponse.setLastName(userEntity.getLastName());
-            detailsResponse.setAddress(userEntity.getAddress());
+            UserDetailsEntity userDetailsEntity = userEntity.getUserDetailsEntity();
+            detailsResponse.setFirstName(userDetailsEntity.getFirstName());
+            detailsResponse.setLastName(userDetailsEntity.getLastName());
+            detailsResponse.setAddress(userDetailsEntity.getAddress());
             detailsResponse.setUserName(userEntity.getUserName());
         }
 

@@ -11,8 +11,8 @@ import java.util.List;
 @Table(name = "announce")
 public class AnnounceEntity {
 
-    @Id()
-    @GeneratedValue
+    @Id
+    @GeneratedValue()
     private long id;
     private String title;
     private String description;
@@ -21,8 +21,9 @@ public class AnnounceEntity {
     private long startSum;
     private String imagePath;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<BidderEntity> bidderEntities;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private UserEntity userEntity;
 
     public Date getStartDate() {
         return startDate;
@@ -80,11 +81,11 @@ public class AnnounceEntity {
         this.category = category;
     }
 
-    public List<BidderEntity> getBidderEntities() {
-        return bidderEntities;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setBidderEntities(List<BidderEntity> bidderEntities) {
-        this.bidderEntities = bidderEntities;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

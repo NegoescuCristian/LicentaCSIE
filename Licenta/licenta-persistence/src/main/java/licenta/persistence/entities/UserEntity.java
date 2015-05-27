@@ -9,42 +9,26 @@ import java.util.List;
 @Table(name="Customer")
 public class UserEntity {
 
-    @Id()
-    @GeneratedValue
+    @Id
+    @GeneratedValue()
     private long id;
     @Column(unique = true)
     private String userName;
-    private String firstName;
-    private String lastName;
-    private String address;
     private String password;
+
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    public String getFirstName() {
-        return firstName;
+    @OneToOne(fetch = FetchType.EAGER)
+    private UserDetailsEntity userDetailsEntity;
+
+    public UserDetailsEntity getUserDetailsEntity() {
+        return userDetailsEntity;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserDetailsEntity(UserDetailsEntity userDetailsEntity) {
+        this.userDetailsEntity = userDetailsEntity;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
 
     public long getId() {
         return id;

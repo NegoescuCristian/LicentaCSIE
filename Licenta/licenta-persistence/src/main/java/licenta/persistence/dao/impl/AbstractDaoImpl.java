@@ -38,7 +38,6 @@ public class AbstractDaoImpl<T> implements AbstractDao<T>{
 
     @Override
     public void persist(T entity) {
-        System.out.println("persist========="+entity.toString());
         entityManager.persist(entity);
     }
 

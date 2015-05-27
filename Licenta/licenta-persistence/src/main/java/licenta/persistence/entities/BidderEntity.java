@@ -12,10 +12,28 @@ public class BidderEntity {
     @Id
     @GeneratedValue()
     private long id;
-
+    private long bidSum;
     @OneToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
 
+    public AnnounceEntity getAnnounceEntity() {
+        return announceEntity;
+    }
+
+    public void setAnnounceEntity(AnnounceEntity announceEntity) {
+        this.announceEntity = announceEntity;
+    }
+
+    public long getBidSum() {
+        return bidSum;
+    }
+
+    public void setBidSum(long bidSum) {
+        this.bidSum = bidSum;
+    }
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private AnnounceEntity announceEntity;
 
     public UserEntity getUserEntity() {
         return userEntity;
