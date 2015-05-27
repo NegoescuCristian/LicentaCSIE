@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ro.licenta.customer.models.AnnounceModel;
 import ro.negoescu.licenta.announce.AnnounceService;
-import ro.negoescu.licenta.announce.TestService;
-
 
 @Path("/announce")
 public class AnnounceController {
