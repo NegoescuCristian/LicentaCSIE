@@ -20,7 +20,9 @@ import ro.licenta.customer.models.UserRole;
 import ro.licenta.models.UserModel;
 import ro.negoescu.licenta.user.UserService;
 
-
+/**
+    Test class for User Controller
+**/
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest {
     
