@@ -19,6 +19,7 @@ import ro.licenta.customer.models.AnnounceModel;
 import ro.licenta.customer.models.UserEntityResponse;
 import ro.negoescu.licenta.announce.AnnounceService;
 import ro.negoescu.licenta.user.UserService;
+
 import ro.licenta.models.UserModel;
 
 @Path("/user")
