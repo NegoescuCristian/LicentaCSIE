@@ -1,7 +1,7 @@
 package ro.licenta.customer.models;
 
 /**
- * Created by churmuzache on 4/24/15.
+ * Created by negoescu.cristi  on 4/24/15.
  */
 public class AccountDetailsResponse {
 
