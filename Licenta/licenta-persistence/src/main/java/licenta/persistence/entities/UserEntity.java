@@ -6,6 +6,7 @@ import ro.licenta.customer.models.UserRole;
 import java.util.List;
 
 @Entity
+
 @Table(name="Customer")
 public class UserEntity {
 
