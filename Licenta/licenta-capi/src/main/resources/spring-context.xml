@@ -24,7 +24,7 @@
 	
 	
 	 <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
-        <property name="scopes">
+          <property name="scopes">
             <map>
                 <entry key="thread">
                     <bean class="org.springframework.context.support.SimpleThreadScope"/>
