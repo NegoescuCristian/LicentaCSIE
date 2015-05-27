@@ -19,7 +19,7 @@ import org.apache.commons.codec.binary.Hex;
 import ro.licenta.models.UserModel;
 
 /**
- * Created by churmuzache on 4/7/15.
+ * Created by negoescu.cristi on 4/7/15.
  */
 public class UserService {
 
