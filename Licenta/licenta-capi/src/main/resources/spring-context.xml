@@ -18,9 +18,14 @@
 	<import resource="classpath:security-context.xml" />
 	<import resource="classpath:database-configuration.xml" />
 	<context:annotation-config />
+	<bean id="announceController" class="licenta.rest.controller.AnnounceController">
+		<property name="testService" ref="testServiceBean"/>    
+	</bean>
+	
+	<bean id="testServiceBean" class="ro.negoescu.licenta.announce.TestServiceImpl"/>
+        
 	
 	<bean id="customerController" class="licenta.rest.controller.UserController" />
-	<bean id="announceController" class="licenta.rest.controller.AnnounceController"/>
 	
 	
 	 <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
@@ -35,6 +40,9 @@
     
 	 <bean id="userDao"
           class="licenta.persistence.dao.impl.UserDaoImpl"/>
+	 <bean id="userDetailsDao"
+	     class="licenta.persistence.dao.impl.UserDetailsDaoImpl"/>
+	 
 	 <bean id="announceDao"
 	      class="licenta.persistence.dao.impl.AnnounceDaoImpl"/>
 
@@ -44,8 +52,11 @@
      </bean>
      
      <bean id="userService" class="ro.negoescu.licenta.user.UserService">
-        <constructor-arg index="0" ref="userDao"/>
+        <constructor-arg index="0" value="userDao"/>
+        <constructor-arg index="1" value="userDetailsDao"/>
      </bean>
+     
+    
      
     
 
