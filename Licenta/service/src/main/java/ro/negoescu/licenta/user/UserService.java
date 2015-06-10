@@ -2,6 +2,7 @@ package ro.negoescu.licenta.user;
 
 import licenta.persistence.dao.AnnounceDao;
 import licenta.persistence.dao.UserDao;
+import licenta.persistence.dao.UserDetailsDao;
 import licenta.persistence.entities.AnnounceEntity;
 import licenta.persistence.entities.UserDetailsEntity;
 import licenta.persistence.entities.UserEntity;
@@ -18,6 +19,8 @@ import org.apache.commons.codec.binary.Hex;
 
 import ro.licenta.models.UserModel;
 
+import java.util.Date;
+
 /**
  * Created by negoescu.cristi on 4/7/15.
  */
@@ -26,13 +29,16 @@ public class UserService {
 
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    private UserDao userDao; 
+    /** The user dao **/
+    private UserDao userDao;
 
-    public UserService(UserDao userDao) {
+    /** The user details dao**/
+    private UserDetailsDao userDetailsDao;
+
+    public UserService(UserDao userDao, UserDetailsDao userDetailsDao) {
         this.userDao=userDao;
-        
+        this.userDetailsDao = userDetailsDao;
     }
-
 
     /**
      *
@@ -66,14 +72,20 @@ public class UserService {
         userDetails.setFirstName(userModel.getFirstName());
         userDetails.setLastName(userModel.getLastName());
         userDetails.setAddress(userModel.getAddress());
+        userDetails.setRegisterDate(new Date());
 
         userEntity.setPassword(Base64.encodeBase64String(userModel.getPassword().getBytes()));
         userEntity.setUserRole(userModel.getUserRole());
         userEntity.setUserDetailsEntity(userDetails);
 
         try {
+            logger.info("Persisting user details for username:"+userEntity.getUserName());
+            userDetailsDao.persist(userDetails);
+            logger.info("Persisting the user entity:"+userEntity.getUserName());
             userDao.persist(userEntity);
         }catch(Exception exception ) {
+            exception.printStackTrace();
+            logger.info(exception.getMessage());
             return false;
         }
         return true;

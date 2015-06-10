@@ -28,6 +28,7 @@ import ro.licenta.models.UserModel;
 public class UserController {
 
     @Autowired
+    @Qualifier(value = "userService")
     private UserService userService;
     
     protected Logger logger = LoggerFactory.getLogger(UserController.class);

@@ -38,11 +38,7 @@
         </property>
     </bean>
     
-	 <bean id="userDao"
-          class="licenta.persistence.dao.impl.UserDaoImpl"/>
-	 <bean id="userDetailsDao"
-	     class="licenta.persistence.dao.impl.UserDetailsDaoImpl"/>
-	 
+
 	 <bean id="announceDao"
 	      class="licenta.persistence.dao.impl.AnnounceDaoImpl"/>
 
@@ -50,7 +46,10 @@
          class="ro.negoescu.licenta.announce.AnnounceService">
          <constructor-arg ref="announceDao"/>
      </bean>
-     
+
+    <bean id="userDetailsDao"
+          class="licenta.persistence.dao.impl.UserDetailsDaoImpl"/>
+
      <bean id="userService" class="ro.negoescu.licenta.user.UserService">
         <constructor-arg index="0" ref="userDao"/>
         <constructor-arg index="1" ref="userDetailsDao"/>

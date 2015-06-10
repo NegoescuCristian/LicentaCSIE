@@ -1,6 +1,7 @@
 package ro.negoescu.licenta.test;
 
 import licenta.persistence.dao.UserDao;
+import licenta.persistence.dao.UserDetailsDao;
 import licenta.persistence.entities.UserEntity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -23,12 +24,14 @@ public class UserServiceTest {
     
     @Mock
     private UserDao userDaoMock;
+    @Mock
+    private UserDetailsDao userDetailsDaoMock;
     
     private UserService userServiceMock;
     
     @Before
     public void init(){
-        userServiceMock = new UserService(userDaoMock);
+        userServiceMock = new UserService(userDaoMock,userDetailsDaoMock);
     }
     
     @Test

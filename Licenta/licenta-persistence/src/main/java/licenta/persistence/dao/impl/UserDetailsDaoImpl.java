@@ -10,4 +10,13 @@ public class UserDetailsDaoImpl extends AbstractDaoImpl<UserDetailsEntity> imple
     public UserDetailsDaoImpl(){
         super(UserDetailsEntity.class);
     }
+
+    @Override
+    public  UserDetailsEntity getUserDetailsByUserName(String userName) {
+        UserDetailsEntity userDetails = new UserDetailsEntity();
+
+        //TODO implement the logic
+
+        return userDetails;
+    }
 }
