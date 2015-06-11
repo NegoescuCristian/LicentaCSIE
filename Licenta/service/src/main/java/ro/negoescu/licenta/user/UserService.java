@@ -1,9 +1,11 @@
 package ro.negoescu.licenta.user;
 
 import licenta.persistence.dao.AnnounceDao;
+import licenta.persistence.dao.BidderDao;
 import licenta.persistence.dao.UserDao;
 import licenta.persistence.dao.UserDetailsDao;
 import licenta.persistence.entities.AnnounceEntity;
+import licenta.persistence.entities.BidderEntity;
 import licenta.persistence.entities.UserDetailsEntity;
 import licenta.persistence.entities.UserEntity;
 
@@ -12,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ro.licenta.customer.models.AccountDetailsResponse;
+import ro.licenta.customer.models.AnnounceDetailsResponse;
 import ro.licenta.customer.models.AnnounceModel;
 import ro.licenta.customer.models.UserEntityResponse;
 
@@ -20,6 +23,8 @@ import org.apache.commons.codec.binary.Hex;
 import ro.licenta.models.UserModel;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by negoescu.cristi on 4/7/15.
@@ -35,9 +40,17 @@ public class UserService {
     /** The user details dao**/
     private UserDetailsDao userDetailsDao;
 
-    public UserService(UserDao userDao, UserDetailsDao userDetailsDao) {
+    /** The announce dao **/
+    private AnnounceDao announceDao;
+
+    /** The bidder dao **/
+    private BidderDao bidderDao;
+
+    public UserService(UserDao userDao, UserDetailsDao userDetailsDao, AnnounceDao announceDao, BidderDao bidderDao) {
         this.userDao=userDao;
         this.userDetailsDao = userDetailsDao;
+        this.announceDao = announceDao;
+        this.bidderDao = bidderDao;
     }
 
     /**
@@ -112,6 +125,7 @@ public class UserService {
     }
 
     /**
+     * Check if a user is valid or not
      *
      * @param userName
      * @param password
@@ -128,6 +142,7 @@ public class UserService {
     }
 
     /**
+     * Returns the account details for a specific user name.
      *
      * @param userName
      * @return
@@ -149,6 +164,55 @@ public class UserService {
 
         return detailsResponse;
     }
-    
+
+    /**
+     * Return the announce details for a specific user name.
+     *
+     * @param userName
+     * @return
+     */
+    public List<AnnounceDetailsResponse> getAnnounceDetailsByUserName(String userName) {
+        List<AnnounceDetailsResponse> detailsResponse = new LinkedList<>();
+
+        List<AnnounceEntity> announces = announceDao.getAnnounceByUserId(userName);
+        if(announces == null) {
+            logger.info("No announces were found for userName:%s",userName);
+        }
+
+        for(AnnounceEntity entity : announces) {
+            AnnounceDetailsResponse response = new AnnounceDetailsResponse();
+
+            response.setCategory(entity.getCategory());
+            response.setDescription(entity.getDescription());
+            response.setStartSum(entity.getStartSum());
+            response.setTitle(entity.getTitle());
+
+            detailsResponse.add(response);
+        }
+
+        return detailsResponse;
+    }
+
+    public List<AnnounceDetailsResponse> getAllAnnounceDetailsByUserName(String userName) {
+        List<AnnounceDetailsResponse> detailsResponse = new LinkedList<>();
+
+        List<BidderEntity> announces = bidderDao.getAllBiddingDetails(userName);
+        if(announces == null) {
+            logger.info("No announces were found for userName:%s",userName);
+        }
+
+        for(BidderEntity entity : announces) {
+            AnnounceDetailsResponse response = new AnnounceDetailsResponse();
+
+            //response.setCategory(entity.getAnnounceEntity().getCategory());
+            //response.setDescription(entity.getDescription());
+            //response.setStartSum(entity.getStartSum());
+            //response.setTitle(entity.getTitle());
+
+            detailsResponse.add(response);
+        }
+
+        return detailsResponse;
+    }
 
 }

@@ -1,6 +1,7 @@
 package licenta.persistence.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by churmuzache on 4/28/15.
@@ -13,14 +14,18 @@ public class BidderEntity {
     @GeneratedValue()
     private long id;
     private long bidSum;
+
     @OneToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
 
-    public AnnounceEntity getAnnounceEntity() {
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<AnnounceEntity> announceEntity;
+
+    public List<AnnounceEntity> getAnnounceEntity() {
         return announceEntity;
     }
 
-    public void setAnnounceEntity(AnnounceEntity announceEntity) {
+    public void setAnnounceEntity(List<AnnounceEntity> announceEntity) {
         this.announceEntity = announceEntity;
     }
 
@@ -32,8 +37,7 @@ public class BidderEntity {
         this.bidSum = bidSum;
     }
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private AnnounceEntity announceEntity;
+
 
     public UserEntity getUserEntity() {
         return userEntity;

@@ -31,7 +31,7 @@ public class UserServiceTest {
     
     @Before
     public void init(){
-        userServiceMock = new UserService(userDaoMock,userDetailsDaoMock);
+        userServiceMock = new UserService(userDaoMock,userDetailsDaoMock,null);
     }
     
     @Test

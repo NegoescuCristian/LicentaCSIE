@@ -6,5 +6,5 @@ import licenta.persistence.entities.AnnounceEntity;
 
 public interface AnnounceDao extends AbstractDao<AnnounceEntity>{
 
-    List<AnnounceEntity> getAnnounceByUserId(long userId);
+    List<AnnounceEntity> getAnnounceByUserId(String userName);
 }

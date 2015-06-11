@@ -39,13 +39,12 @@
     <bean id="userService" class="ro.negoescu.licenta.user.UserService">
         <constructor-arg index="0" ref="userDao"/>
         <constructor-arg index="1" ref="userDetailsDao"/>
+        <constructor-arg index = "2" ref = "announceDao"/>
     </bean>
 
-     <bean id="announceDao"
-	      class="licenta.persistence.dao.impl.AnnounceDaoImpl"/>
-
- 	 <bean id="announceService" 
+ 	 <bean id="announceService"
          class="ro.negoescu.licenta.announce.AnnounceService">
-         <constructor-arg ref="announceDao"/>
+         <constructor-arg index = "0" ref="announceDao"/>
+         <constructor-arg index = "1" ref="userDao"/>
      </bean>
 </beans>

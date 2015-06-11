@@ -14,13 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 
-import ro.licenta.customer.models.AccountDetailsResponse;
-import ro.licenta.customer.models.AnnounceModel;
-import ro.licenta.customer.models.UserEntityResponse;
+import ro.licenta.customer.models.*;
 import ro.negoescu.licenta.announce.AnnounceService;
 import ro.negoescu.licenta.user.UserService;
 
 import ro.licenta.models.UserModel;
+
+import java.util.List;
 
 @Path("/user")
 @Consumes("application/json")
@@ -101,6 +101,23 @@ public class UserController {
         }
         return Response.status(HttpStatus.OK.value()).entity(response).build();
     }
-    
+
+    @GET
+    @Path("/announce/{user_name}")
+    @Produces("application/json")
+    public Response getAnnouncesByUserName(@PathParam("user_name") String userName) {
+        List<AnnounceDetailsResponse> response = userService.getAnnounceDetailsByUserName(userName);
+
+        if(response == null) {
+            logger.info("No announces were found for user name:"+userName);
+            return Response.status(HttpStatus.NOT_FOUND.value()).entity(null).build();
+        }
+
+        UserAnnounceResponse userAnnounceResponse = new UserAnnounceResponse();
+        userAnnounceResponse.setUserName(userName);
+        userAnnounceResponse.setAnnounceDetailsResponseList(response);
+
+        return Response.status(HttpStatus.OK.value()).entity(userAnnounceResponse).build();
+    }
    
 }
