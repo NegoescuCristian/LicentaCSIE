@@ -47,6 +47,7 @@ public class AnnounceService {
         announceEntity.setStartSum(announce.getStartSum());
         announceEntity.setImagePath(announce.getImagePath());
         announceEntity.setUserEntity(userEntity);
+        announceEntity.setEndDate(announce.getEndDate());
         try{
             announceDao.persist(announceEntity);
         }catch(Exception ex){

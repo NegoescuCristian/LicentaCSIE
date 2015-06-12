@@ -48,4 +48,5 @@
           class="licenta.persistence.dao.impl.UserDetailsDaoImpl"/>
     <bean id="announceDao"
           class="licenta.persistence.dao.impl.AnnounceDaoImpl"/>
+    <bean id="bidderDao" class="licenta.persistence.dao.impl.BidderDaoImpl"/>
 </beans>

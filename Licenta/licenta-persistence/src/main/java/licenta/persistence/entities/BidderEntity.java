@@ -18,14 +18,14 @@ public class BidderEntity {
     @OneToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<AnnounceEntity> announceEntity;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AnnounceEntity announceEntity;
 
-    public List<AnnounceEntity> getAnnounceEntity() {
+    public AnnounceEntity getAnnounceEntity() {
         return announceEntity;
     }
 
-    public void setAnnounceEntity(List<AnnounceEntity> announceEntity) {
+    public void setAnnounceEntity(AnnounceEntity announceEntity) {
         this.announceEntity = announceEntity;
     }
 

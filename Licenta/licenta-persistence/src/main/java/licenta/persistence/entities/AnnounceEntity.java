@@ -18,9 +18,18 @@ public class AnnounceEntity {
     private String description;
     private Category category;
     private Date startDate;
+    private Date endDate;
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     private long startSum;
     private String imagePath;
-
 
     @ManyToOne(fetch = FetchType.EAGER)
     private UserEntity userEntity;

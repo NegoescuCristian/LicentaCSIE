@@ -12,4 +12,8 @@ public interface BidderDao extends AbstractDao<BidderEntity> {
 
     List<BidderEntity> getAllBiddingDetails(String userName);
 
+    List<BidderEntity> getBiddersForAnnounces(List<Long> announceIds);
+
+    List<BidderEntity> getBiddersForAnnounce(long announceId);
+
 }

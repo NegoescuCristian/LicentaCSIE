@@ -13,10 +13,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ro.licenta.customer.models.AccountDetailsResponse;
-import ro.licenta.customer.models.AnnounceDetailsResponse;
-import ro.licenta.customer.models.AnnounceModel;
-import ro.licenta.customer.models.UserEntityResponse;
+import ro.licenta.customer.models.*;
 
 import org.apache.commons.codec.binary.Hex;
 
@@ -177,15 +174,29 @@ public class UserService {
         List<AnnounceEntity> announces = announceDao.getAnnounceByUserId(userName);
         if(announces == null) {
             logger.info("No announces were found for userName:%s",userName);
+            return null;
         }
 
         for(AnnounceEntity entity : announces) {
             AnnounceDetailsResponse response = new AnnounceDetailsResponse();
+            List<BidderDetail> biddersEntities = new LinkedList<>();
+            //call to get the bidders list
+            List<BidderEntity> bidders = bidderDao.getBiddersForAnnounce(entity.getId());
+
+            for(BidderEntity b : bidders) {
+                BidderDetail detail = new BidderDetail();
+
+                detail.setUserName(b.getUserEntity().getUserName());
+                detail.setBidSum(b.getBidSum());
+
+                biddersEntities.add(detail);
+            }
 
             response.setCategory(entity.getCategory());
             response.setDescription(entity.getDescription());
             response.setStartSum(entity.getStartSum());
             response.setTitle(entity.getTitle());
+            response.setBidderEntityList(biddersEntities);
 
             detailsResponse.add(response);
         }

@@ -1,5 +1,7 @@
 package ro.licenta.customer.models;
 
+import java.util.Date;
+
 public class AnnounceModel {
     
     private long userId;
@@ -8,6 +10,16 @@ public class AnnounceModel {
     private Category category;
     private long startSum;
     private String imagePath;
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    private Date endDate;
 
     public long getStartSum() {
         return startSum;
