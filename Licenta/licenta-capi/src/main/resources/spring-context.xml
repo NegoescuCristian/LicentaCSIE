@@ -44,7 +44,8 @@
 
  	 <bean id="announceService" 
          class="ro.negoescu.licenta.announce.AnnounceService">
-         <constructor-arg ref="announceDao"/>
+         <constructor-arg index="0" ref="announceDao"/>
+         <constructor-arg index="1" ref="bidderDao"/>
      </bean>
 
     <bean id="userDetailsDao"

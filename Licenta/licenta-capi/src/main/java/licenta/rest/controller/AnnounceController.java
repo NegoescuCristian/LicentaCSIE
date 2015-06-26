@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
+import ro.licenta.customer.models.AnnounceDetailsComplexResponse;
 import ro.licenta.customer.models.AnnounceDetailsResponse;
 import ro.licenta.customer.models.AnnounceModel;
 import ro.negoescu.licenta.announce.AnnounceService;
@@ -19,10 +20,10 @@ public class AnnounceController {
 
     @Autowired
     private AnnounceService announceService;
-   
+
     //private TestService testService;
 
-    protected Logger logger = LoggerFactory.getLogger(AnnounceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AnnounceController.class);
     
     @POST
     @Path("/register/{user_name}")
@@ -38,4 +39,29 @@ public class AnnounceController {
         return Response.status(200).build();
     }
 
+    @GET
+    @Path("/getAll")
+    @Produces("application/json")
+    public Response getAllAnnounces() {
+        List<AnnounceDetailsResponse> response = announceService.getAnnounceDetails();
+        if(response == null) {
+            logger.error("No announce was found in DB");
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(response).build();
+    }
+
+    @GET
+    @Path("/{announceId}")
+    @Produces("application/json")
+    public Response getAnnounceByAnnounceId(@PathParam("announceId") long announceId) {
+        AnnounceDetailsComplexResponse response = announceService.getAnnounceByAnnounceId(announceId);
+
+        if(response == null) {
+            logger.info("No information was found for announceId:"+announceId);
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        return Response.status(Response.Status.OK).entity(response).build();
+    }
 }

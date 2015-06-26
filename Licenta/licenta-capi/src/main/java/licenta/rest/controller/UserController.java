@@ -82,11 +82,11 @@ public class UserController {
     @Consumes("application/json")
     @Produces("application/json")
     public Response validateCustomer(UserModel user) {
-        boolean isValidUser = userService.isValidUser(user.getUserName(), user.getPassword());
-        if (!isValidUser) {
+        UserEntityResponse userResponse = userService.isValidUser(user.getUserName(), user.getPassword());
+        if (userResponse == null) {
             return Response.status(HttpStatus.NOT_FOUND.value()).build();
         }
-        return Response.status(HttpStatus.OK.value()).build();
+        return Response.status(HttpStatus.OK.value()).entity(userResponse).build();
     }
 
     @GET

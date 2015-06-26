@@ -128,14 +128,16 @@ public class UserService {
      * @param password
      * @return
      */
-    public boolean isValidUser(String userName, String password) {
-
+    public UserEntityResponse isValidUser(String userName, String password) {
+        UserEntityResponse response = new UserEntityResponse();
         UserEntity entity = userDao.findByUsernameAndPassword(userName,Base64.encodeBase64String(password.getBytes()));
         if(entity == null) {
             logger.error("No user was found for userName <%s>",userName);
-            return false;
+            return null;
+        }else {
+            response.setId(entity.getId());
         }
-        return true;
+        return response;
     }
 
     /**
