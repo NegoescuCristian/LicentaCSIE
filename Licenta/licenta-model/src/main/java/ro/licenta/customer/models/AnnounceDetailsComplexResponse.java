@@ -11,9 +11,19 @@ public class AnnounceDetailsComplexResponse {
     private long announceId;
     private Category category;
     private String description;
+    private long startSum;
     private String title;
     private Date endDate;
     private Date startDate;
+    private String userNameFounder;
+
+    public String getUserNameFounder() {
+        return userNameFounder;
+    }
+
+    public void setUserNameFounder(String userNameFounder) {
+        this.userNameFounder = userNameFounder;
+    }
 
     @Override
     public String toString() {
@@ -35,6 +45,14 @@ public class AnnounceDetailsComplexResponse {
 
     public void setBidderDetailComplexes(List<BidderDetailComplex> bidderDetailComplexes) {
         this.bidderDetailComplexes = bidderDetailComplexes;
+    }
+
+    public long getStartSum() {
+        return startSum;
+    }
+
+    public void setStartSum(long startSum) {
+        this.startSum = startSum;
     }
 
     public long getAnnounceId() {

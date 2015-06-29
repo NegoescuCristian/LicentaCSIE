@@ -11,6 +11,7 @@ public class BidderDetailComplex {
     private Date registerDate;
     private String firstName;
     private String lastName;
+    private long biddedSum;
 
     public String getUserName() {
         return userName;
@@ -42,5 +43,13 @@ public class BidderDetailComplex {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public long getBiddedSum() {
+        return biddedSum;
+    }
+
+    public void setBiddedSum(long biddedSum) {
+        this.biddedSum = biddedSum;
     }
 }

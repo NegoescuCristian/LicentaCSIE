@@ -44,6 +44,11 @@ public class BidderService {
             return false;
         }
 
+        if(announceEntity.getUserEntity().getUserName().equals(bidModel.getUserName())) {
+            logger.info("the user with user name "+bidModel.getUserName()+" cannot bid on its own announce");
+            return false;
+        }
+
         bidderEntity.setBidSum(bidModel.getBidSum());
         bidderEntity.setAnnounceEntity(announceEntity);
         bidderEntity.setUserEntity(userEntity);

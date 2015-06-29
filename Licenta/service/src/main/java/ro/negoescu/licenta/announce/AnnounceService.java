@@ -82,6 +82,7 @@ public class AnnounceService {
             detailsResponse.setAnnounceId(a.getId());
 
             response.add(detailsResponse);
+
         }
 
         return response;

@@ -60,7 +60,7 @@ public class AnnounceDaoImpl extends AbstractDaoImpl<AnnounceEntity> implements 
         query.setParameter("announce_id",announceId);
 
         List<BidderEntity> bidders = query.getResultList();
-        if (bidders == null) {
+        if (bidders == null || bidders.size() == 0) {
             return null;
         }
         List<BidderDetailComplex> complex = new LinkedList<>();
@@ -71,6 +71,7 @@ public class AnnounceDaoImpl extends AbstractDaoImpl<AnnounceEntity> implements 
             details.setFirstName(b.getUserEntity().getUserDetailsEntity().getFirstName());
             details.setLastName(b.getUserEntity().getUserDetailsEntity().getLastName());
             details.setRegisterDate(b.getUserEntity().getUserDetailsEntity().getRegisterDate());
+            details.setBiddedSum(b.getBidSum());
 
             complex.add(details);
         }
@@ -85,6 +86,8 @@ public class AnnounceDaoImpl extends AbstractDaoImpl<AnnounceEntity> implements 
         details.setDescription(announce.getDescription());
         details.setBidderDetailComplexes(complex);
         details.setTitle(announce.getTitle());
+        details.setStartSum(announce.getStartSum());
+        details.setUserNameFounder(announce.getUserEntity().getUserName());
 
         return details;
     }
