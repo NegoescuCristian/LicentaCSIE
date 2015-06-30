@@ -56,12 +56,6 @@ public class AnnounceController {
     @Produces("application/json")
     public Response getAnnounceByAnnounceId(@PathParam("announceId") long announceId) {
         AnnounceDetailsComplexResponse response = announceService.getAnnounceByAnnounceId(announceId);
-
-        if(response == null) {
-            logger.info("No information was found for announceId:"+announceId);
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
         return Response.status(Response.Status.OK).entity(response).build();
     }
 }

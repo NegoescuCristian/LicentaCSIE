@@ -16,6 +16,7 @@ public class AnnounceDetailsComplexResponse {
     private Date endDate;
     private Date startDate;
     private String userNameFounder;
+    private List<BidderDetailComplex> bidderDetailComplexes;
 
     public String getUserNameFounder() {
         return userNameFounder;
@@ -24,20 +25,6 @@ public class AnnounceDetailsComplexResponse {
     public void setUserNameFounder(String userNameFounder) {
         this.userNameFounder = userNameFounder;
     }
-
-    @Override
-    public String toString() {
-        return "AnnounceDetailsComplexResponse{" +
-                "announceId=" + announceId +
-                ", category=" + category +
-                ", description='" + description + '\'' +
-                ", endDate=" + endDate +
-                ", startDate=" + startDate +
-                ", bidderDetailComplexes=" + bidderDetailComplexes +
-                '}';
-    }
-
-    private List<BidderDetailComplex> bidderDetailComplexes;
 
     public List<BidderDetailComplex> getBidderDetailComplexes() {
         return bidderDetailComplexes;
@@ -102,5 +89,18 @@ public class AnnounceDetailsComplexResponse {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return "AnnounceDetailsComplexResponse{" +
+                "announceId=" + announceId +
+                ", category=" + category +
+                ", description='" + description + '\'' +
+                ", endDate=" + endDate +
+                ", startDate=" + startDate +
+                ", bidderDetailComplexes=" + bidderDetailComplexes +
+                '}';
+    }
+
 
 }

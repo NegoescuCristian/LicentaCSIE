@@ -56,38 +56,55 @@ public class AnnounceDaoImpl extends AbstractDaoImpl<AnnounceEntity> implements 
                 "JOIN b.announceEntity a " +
                 "JOIN b.userEntity u WHERE a.id=(:announce_id)";
 
+        final String announceString = "select a from AnnounceEntity a where a.id=(:announce_id)";
+
         Query query = this.entityManager.createQuery(queryString);
         query.setParameter("announce_id",announceId);
+        AnnounceDetailsComplexResponse details = new AnnounceDetailsComplexResponse();
 
         List<BidderEntity> bidders = query.getResultList();
         if (bidders == null || bidders.size() == 0) {
-            return null;
+
+            Query query1 = this.entityManager.createQuery(announceString);
+            query1.setParameter("announce_id",announceId);
+
+            AnnounceEntity announce = (AnnounceEntity)query1.getResultList().get(0);
+            details.setAnnounceId(announce.getId());
+            details.setStartDate(announce.getStartDate());
+            details.setEndDate(announce.getEndDate());
+            details.setCategory(announce.getCategory());
+            details.setDescription(announce.getDescription());
+            details.setBidderDetailComplexes(null);
+            details.setTitle(announce.getTitle());
+            details.setStartSum(announce.getStartSum());
+            details.setUserNameFounder(announce.getUserEntity().getUserName());
+        }else {
+            List<BidderDetailComplex> complex = new LinkedList<>();
+            for (BidderEntity b : bidders) {
+                BidderDetailComplex details1 = new BidderDetailComplex();
+
+                details1.setUserName(b.getUserEntity().getUserName());
+                details1.setFirstName(b.getUserEntity().getUserDetailsEntity().getFirstName());
+                details1.setLastName(b.getUserEntity().getUserDetailsEntity().getLastName());
+                details1.setRegisterDate(b.getUserEntity().getUserDetailsEntity().getRegisterDate());
+                details1.setBiddedSum(b.getBidSum());
+
+                complex.add(details1);
+            }
+
+            AnnounceEntity announce = bidders.get(0).getAnnounceEntity();
+
+            details.setAnnounceId(announce.getId());
+            details.setStartDate(announce.getStartDate());
+            details.setEndDate(announce.getEndDate());
+            details.setCategory(announce.getCategory());
+            details.setDescription(announce.getDescription());
+            details.setBidderDetailComplexes(complex);
+            details.setTitle(announce.getTitle());
+            details.setStartSum(announce.getStartSum());
+            details.setUserNameFounder(announce.getUserEntity().getUserName());
         }
-        List<BidderDetailComplex> complex = new LinkedList<>();
-        for (BidderEntity b : bidders) {
-            BidderDetailComplex details = new BidderDetailComplex();
 
-            details.setUserName(b.getUserEntity().getUserName());
-            details.setFirstName(b.getUserEntity().getUserDetailsEntity().getFirstName());
-            details.setLastName(b.getUserEntity().getUserDetailsEntity().getLastName());
-            details.setRegisterDate(b.getUserEntity().getUserDetailsEntity().getRegisterDate());
-            details.setBiddedSum(b.getBidSum());
-
-            complex.add(details);
-        }
-
-        AnnounceDetailsComplexResponse details = new AnnounceDetailsComplexResponse();
-        AnnounceEntity announce = bidders.get(0).getAnnounceEntity();
-
-        details.setAnnounceId(announce.getId());
-        details.setStartDate(announce.getStartDate());
-        details.setEndDate(announce.getEndDate());
-        details.setCategory(announce.getCategory());
-        details.setDescription(announce.getDescription());
-        details.setBidderDetailComplexes(complex);
-        details.setTitle(announce.getTitle());
-        details.setStartSum(announce.getStartSum());
-        details.setUserNameFounder(announce.getUserEntity().getUserName());
 
         return details;
     }
