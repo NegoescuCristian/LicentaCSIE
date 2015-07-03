@@ -15,6 +15,7 @@ import licenta.persistence.entities.BidderEntity;
 import licenta.persistence.entities.UserEntity;
 import ro.licenta.customer.models.AnnounceDetailsComplexResponse;
 import ro.licenta.customer.models.BidderDetailComplex;
+import ro.licenta.customer.models.Category;
 
 public class AnnounceDaoImpl extends AbstractDaoImpl<AnnounceEntity> implements AnnounceDao {
 
@@ -107,6 +108,15 @@ public class AnnounceDaoImpl extends AbstractDaoImpl<AnnounceEntity> implements 
 
 
         return details;
+    }
+
+    public List<AnnounceEntity> getAnnounceByCategory(String category) {
+        final String queryString = "select a from AnnounceEntity a where a.category=(:category_param)";
+        final Query query = this.entityManager.createQuery(queryString);
+        Category c = Category.valueOf(category);
+        query.setParameter("category_param",c);
+
+        return query.getResultList();
     }
 
 }

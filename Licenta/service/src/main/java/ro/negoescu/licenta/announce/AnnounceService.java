@@ -16,6 +16,7 @@ import ro.licenta.customer.models.AnnounceModel;
 import ro.licenta.customer.models.BidderDetail;
 import ro.negoescu.licenta.user.UserService;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +35,28 @@ public class AnnounceService {
         this.userDao = userDao;
         this.announceDao = announceDao;
     }
-    
+
+    public List<AnnounceDetailsResponse> getAnnounceByCategory(String category) {
+        List<AnnounceEntity> announces = announceDao.getAnnounceByCategory(category);
+        List<AnnounceDetailsResponse> responseAnnounceList = new LinkedList<>();
+        for(AnnounceEntity a : announces) {
+            AnnounceDetailsResponse detailsResponse = new AnnounceDetailsResponse();
+
+            detailsResponse.setTitle(a.getTitle());
+            detailsResponse.setDescription(a.getDescription());
+            detailsResponse.setCategory(a.getCategory());
+            detailsResponse.setStartDate(a.getStartDate());
+            detailsResponse.setEndDate(a.getEndDate());
+            detailsResponse.setStartSum(a.getStartSum());
+            detailsResponse.setBidderEntityList(null);
+            detailsResponse.setAnnounceId(a.getId());
+
+            responseAnnounceList.add(detailsResponse);
+        }
+
+        return responseAnnounceList;
+    }
+
     
     public boolean registerAnnounce(AnnounceModel announce, String userName){
 

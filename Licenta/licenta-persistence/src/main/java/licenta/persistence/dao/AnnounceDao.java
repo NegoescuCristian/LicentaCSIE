@@ -11,5 +11,7 @@ public interface AnnounceDao extends AbstractDao<AnnounceEntity>{
 
     List<AnnounceEntity> getAllAnnounces();
 
-    public AnnounceDetailsComplexResponse getAnnounceByAnnounceId(long announceId);
+    AnnounceDetailsComplexResponse getAnnounceByAnnounceId(long announceId);
+
+    List<AnnounceEntity> getAnnounceByCategory(String category);
 }

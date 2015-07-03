@@ -58,4 +58,16 @@ public class AnnounceController {
         AnnounceDetailsComplexResponse response = announceService.getAnnounceByAnnounceId(announceId);
         return Response.status(Response.Status.OK).entity(response).build();
     }
+
+    @GET
+    @Path("/category/{category}")
+    @Produces("application/json")
+    public Response getAnnounceByCategory(@PathParam("category") String category) {
+        List<AnnounceDetailsResponse> response = announceService.getAnnounceByCategory(category);
+
+        logger.info("response size:"+response.size());
+
+        return Response.status(Response.Status.OK).entity(response).build();
+    }
+
 }
